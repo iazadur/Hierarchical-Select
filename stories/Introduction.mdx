@@ -1,0 +1,100 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction/Getting Started" />
+
+# Hierarchical Select Component
+
+<div className="intro-banner">
+  <div className="intro-logo">
+    <img src="logo.png" alt="Hierarchical Select Logo" />
+  </div>
+  <div className="intro-content">
+    <p>
+      A flexible and powerful React component for creating dependent/hierarchical dropdown selections.
+      Perfect for country/region/city selectors, category/subcategory filtering, or any multi-level data navigation.
+    </p>
+    <div className="intro-badges">
+      <a href="https://www.npmjs.com/package/@iazadur/hierarchical-select" target="_blank">
+        <img src="https://img.shields.io/npm/v/@iazadur/hierarchical-select.svg?style=flat-square" alt="npm version" />
+      </a>
+      <a href="https://github.com/iazadur/hierarchical-select" target="_blank">
+        <img src="https://img.shields.io/github/stars/iazadur/hierarchical-select.svg?style=flat-square" alt="GitHub stars" />
+      </a>
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" />
+    </div>
+  </div>
+</div>
+
+## Features
+
+- **Two UI Frameworks**: Supports both Ant Design and Shadcn UI out of the box
+- **Cascading Selections**: Child dropdowns update based on parent selections
+- **Asynchronous Loading**: Built-in loading states for data fetching
+- **Multiple Selection**: Supports multi-select at any level
+- **Error Handling**: Elegant error display and recovery
+- **Fully Typed**: Complete TypeScript definitions
+- **Responsive**: Works well on mobile and desktop
+- **Accessible**: Built with accessibility in mind
+
+## Installation
+
+```bash
+npm install @iazadur/hierarchical-select
+```
+
+Or with yarn:
+
+```bash
+yarn add @iazadur/hierarchical-select
+```
+
+## Basic Usage
+
+```jsx
+import HierarchicalSelect from '@iazadur/hierarchical-select';
+
+function LocationSelector() {
+  return (
+    <HierarchicalSelect
+      fields={[
+        {
+          index: 0,
+          options: [
+            { value: 'us', label: 'United States' },
+            { value: 'ca', label: 'Canada' },
+            { value: 'uk', label: 'United Kingdom' },
+          ],
+          label: 'Country',
+        },
+        {
+          index: 1,
+          options: [],
+          label: 'Region',
+          fetchOptions: async (parentValue) => {
+            // Fetch regions based on selected country
+            const response = await fetchRegions(parentValue);
+            return response.data;
+          }
+        },
+        {
+          index: 2,
+          options: [],
+          label: 'City',
+          multiple: true,
+          fetchOptions: async (parentValue) => {
+            // Fetch cities based on selected region
+            const response = await fetchCities(parentValue);
+            return response.data;
+          }
+        }
+      ]}
+      designSystem="antd" // or "shadcn"
+      onChange={(values) => console.log('Selected:', values)}
+    />
+  );
+}
+```
+
+## Explore Components
+
+Check out the component examples in the sidebar to see Hierarchical Select in action.

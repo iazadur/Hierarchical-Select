@@ -1,28 +1,24 @@
 import React from 'react';
-import { Meta, StoryObj } from '@storybook/react';
 import HierarchicalSelect from '../src';
 import { FieldConfig } from '../src/types';
 
-const meta: Meta<typeof HierarchicalSelect> = {
+export default {
     title: 'Components/HierarchicalSelect',
     component: HierarchicalSelect,
     parameters: {
-        layout: 'centered',
+        layout: 'padded',
     },
     tags: ['autodocs'],
 };
 
-export default meta;
-type Story = StoryObj<typeof HierarchicalSelect>;
-
-// Basic fields for the Ant Design story
-const antdFields: FieldConfig[] = [
+// Basic fields for the stories
+const locationFields = [
     {
         index: 0,
         options: [
-            { value: 'bd', label: 'Bangladesh' },
-            { value: 'in', label: 'India' },
             { value: 'us', label: 'United States' },
+            { value: 'ca', label: 'Canada' },
+            { value: 'uk', label: 'United Kingdom' },
         ],
         placeholder: 'Select Country',
         label: 'Country',
@@ -36,23 +32,25 @@ const antdFields: FieldConfig[] = [
             // Simulate API call with a delay
             await new Promise((resolve) => setTimeout(resolve, 500));
 
-            const regions: Record<string, { value: string; label: string }[]> = {
-                bd: [
-                    { value: 'dhk', label: 'Dhaka' },
-                    { value: 'ctg', label: 'Chittagong' },
-                ],
-                in: [
-                    { value: 'dl', label: 'Delhi' },
-                    { value: 'mb', label: 'Mumbai' },
-                ],
+            const regions = {
                 us: [
                     { value: 'ca', label: 'California' },
                     { value: 'ny', label: 'New York' },
                     { value: 'tx', label: 'Texas' },
                 ],
+                ca: [
+                    { value: 'on', label: 'Ontario' },
+                    { value: 'qc', label: 'Quebec' },
+                    { value: 'bc', label: 'British Columbia' },
+                ],
+                uk: [
+                    { value: 'eng', label: 'England' },
+                    { value: 'sct', label: 'Scotland' },
+                    { value: 'wls', label: 'Wales' },
+                ],
             };
 
-            return regions[parentValue as string] || [];
+            return regions[parentValue] || [];
         },
     },
     {
@@ -65,86 +63,120 @@ const antdFields: FieldConfig[] = [
             // Simulate API call with a delay
             await new Promise((resolve) => setTimeout(resolve, 500));
 
-            const cities: Record<string, { value: string; label: string }[]> = {
-                dhk: [
-                    { value: 'mirpur', label: 'Mirpur' },
-                    { value: 'gulshan', label: 'Gulshan' },
-                ],
-                ctg: [
-                    { value: 'agrabad', label: 'Agrabad' },
-                    { value: 'pahartali', label: 'Pahartali' },
-                ],
-                dl: [
-                    { value: 'newdelhi', label: 'New Delhi' },
-                    { value: 'olddelhi', label: 'Old Delhi' },
-                ],
-                mb: [
-                    { value: 'andheri', label: 'Andheri' },
-                    { value: 'bandra', label: 'Bandra' },
-                ],
+            const cities = {
                 ca: [
                     { value: 'sf', label: 'San Francisco' },
                     { value: 'la', label: 'Los Angeles' },
                 ],
                 ny: [
-                    { value: 'manhattan', label: 'Manhattan' },
-                    { value: 'brooklyn', label: 'Brooklyn' },
-                    { value: 'queens', label: 'Queens' },
+                    { value: 'nyc', label: 'New York City' },
+                    { value: 'buf', label: 'Buffalo' },
                 ],
                 tx: [
-                    { value: 'houston', label: 'Houston' },
-                    { value: 'austin', label: 'Austin' },
-                    { value: 'dallas', label: 'Dallas' },
+                    { value: 'hou', label: 'Houston' },
+                    { value: 'aus', label: 'Austin' },
+                ],
+                on: [
+                    { value: 'tor', label: 'Toronto' },
+                    { value: 'ott', label: 'Ottawa' },
+                ],
+                qc: [
+                    { value: 'mtl', label: 'Montreal' },
+                    { value: 'que', label: 'Quebec City' },
+                ],
+                bc: [
+                    { value: 'van', label: 'Vancouver' },
+                    { value: 'vic', label: 'Victoria' },
+                ],
+                eng: [
+                    { value: 'lon', label: 'London' },
+                    { value: 'man', label: 'Manchester' },
+                ],
+                sct: [
+                    { value: 'edi', label: 'Edinburgh' },
+                    { value: 'gla', label: 'Glasgow' },
+                ],
+                wls: [
+                    { value: 'cdf', label: 'Cardiff' },
+                    { value: 'swn', label: 'Swansea' },
                 ],
             };
 
-            return cities[parentValue as string] || [];
+            return cities[parentValue] || [];
         },
     },
 ];
 
-// The same fields for Shadcn UI story
-const shadcnFields = [...antdFields];
+// Template for creating stories
+const Template = (args) => <HierarchicalSelect {...args} />;
 
-export const WithAntDesign: Story = {
-    args: {
-        fields: antdFields,
-        designSystem: 'antd',
-        onChange: (values) => console.log('Selected values:', values),
-        onError: (error) => console.error('Error:', error),
+// Ant Design example
+export const AntDesignExample = Template.bind({});
+AntDesignExample.args = {
+    fields: locationFields,
+    designSystem: 'antd',
+    onChange: (values) => console.log('Selected values:', values),
+    onError: (error) => console.error('Error:', error),
+};
+AntDesignExample.parameters = {
+    docs: {
+        description: {
+            story: 'Basic example using Ant Design UI components with country, region, and city selection.',
+        },
     },
 };
 
-export const WithShadcnUI: Story = {
-    args: {
-        fields: shadcnFields,
-        designSystem: 'shadcn',
-        onChange: (values) => console.log('Selected values:', values),
-        onError: (error) => console.error('Error:', error),
+// Shadcn UI example
+export const ShadcnUIExample = Template.bind({});
+ShadcnUIExample.args = {
+    fields: locationFields,
+    designSystem: 'shadcn',
+    onChange: (values) => console.log('Selected values:', values),
+    onError: (error) => console.error('Error:', error),
+};
+ShadcnUIExample.parameters = {
+    docs: {
+        description: {
+            story: 'The same hierarchical select implemented with Shadcn UI (Radix UI) components.',
+        },
     },
 };
 
-export const Disabled: Story = {
-    args: {
-        fields: antdFields,
-        designSystem: 'antd',
-        disabled: true,
-        onChange: (values) => console.log('Selected values:', values),
-        onError: (error) => console.error('Error:', error),
+// Disabled state example
+export const DisabledState = Template.bind({});
+DisabledState.args = {
+    fields: locationFields,
+    designSystem: 'antd',
+    disabled: true,
+    onChange: (values) => console.log('Selected values:', values),
+    onError: (error) => console.error('Error:', error),
+};
+DisabledState.parameters = {
+    docs: {
+        description: {
+            story: 'Example showing the component in a fully disabled state.',
+        },
     },
 };
 
-export const WithError: Story = {
-    args: {
-        fields: [
-            {
-                ...antdFields[0],
-                errorMessage: 'Please select a valid country',
-            },
-            ...antdFields.slice(1),
-        ],
-        designSystem: 'antd',
-        onChange: (values) => console.log('Selected values:', values),
-        onError: (error) => console.error('Error:', error),
+// Example with error state
+export const WithErrorState = Template.bind({});
+WithErrorState.args = {
+    fields: [
+        {
+            ...locationFields[0],
+            errorMessage: 'Please select a valid country',
+        },
+        ...locationFields.slice(1),
+    ],
+    designSystem: 'antd',
+    onChange: (values) => console.log('Selected values:', values),
+    onError: (error) => console.error('Error:', error),
+};
+WithErrorState.parameters = {
+    docs: {
+        description: {
+            story: 'Example showing how errors are displayed in the component.',
+        },
     },
 };
