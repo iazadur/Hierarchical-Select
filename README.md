@@ -245,6 +245,10 @@ The component follows WAI-ARIA standards:
 - For Ant Design, ensure you've imported Ant Design CSS
 - For Shadcn, check your Tailwind configuration
 
+## Documentation
+
+Check out our interactive component documentation at [https://iazadur.github.io/hierarchical-select/](https://iazadur.github.io/hierarchical-select/)
+
 ## License
 
 MIT

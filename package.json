@@ -28,6 +28,7 @@
     ],
     "author": "",
     "license": "MIT",
+    "homepage": "https://iazadur.github.io/hierarchical-select/",
     "peerDependencies": {
         "@radix-ui/react-select": "^2.0.0",
         "antd": "^5.0.0",
