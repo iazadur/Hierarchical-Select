@@ -12,6 +12,11 @@ export interface FieldConfig {
     fetchOptions?: (parentValue: any) => Promise<OptionType[]> | OptionType[];
     disabled?: boolean;
     errorMessage?: string;
+    // Custom styling options
+    customStyle?: React.CSSProperties;
+    className?: string;
+    selectStyle?: React.CSSProperties;
+    selectClassName?: string;
 }
 
 export interface HierarchicalSelectProps {

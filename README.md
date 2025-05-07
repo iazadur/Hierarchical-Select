@@ -1,8 +1,35 @@
 # Hierarchical Select
 
-A production-ready React component for hierarchical (dependent) dropdowns, designed for both Ant Design and Shadcn UI.
+<p align="center">
+  <a href="https://iazadur.github.io/Hierarchical-Select/" target="_blank">
+    <img src="https://raw.githubusercontent.com/iazadur/Hierarchical-Select/main/public/logo.svg" height="120" alt="Hierarchical Select Logo" />
+  </a>
+</p>
 
-## Features
+<p align="center">
+  <a href="https://www.npmjs.com/package/@iazadur/hierarchical-select" target="_blank">
+    <img src="https://img.shields.io/npm/v/@iazadur/hierarchical-select.svg?style=flat-square" alt="npm version" />
+  </a>
+  <a href="https://github.com/iazadur/Hierarchical-Select/blob/main/LICENSE" target="_blank">
+    <img src="https://img.shields.io/github/license/iazadur/Hierarchical-Select?style=flat-square" alt="license" />
+  </a>
+  <a href="https://github.com/iazadur/Hierarchical-Select" target="_blank">
+    <img src="https://img.shields.io/github/stars/iazadur/Hierarchical-Select?style=flat-square" alt="GitHub stars" />
+  </a>
+  <a href="https://iazadur.github.io/Hierarchical-Select/" target="_blank">
+    <img src="https://img.shields.io/badge/documentation-storybook-7026b9?style=flat-square" alt="documentation" />
+  </a>
+</p>
+
+<p align="center">
+  A production-ready React component for hierarchical (dependent) dropdowns, designed for both Ant Design and Shadcn UI.
+</p>
+
+## 📖 Live Documentation & Demos
+
+Check out our **[interactive component documentation](https://iazadur.github.io/Hierarchical-Select/)** to see live examples and explore all features.
+
+## ✨ Features
 
 - **Hierarchical Dependency**: Support for up to 5 select fields with parent-child relationships
 - **Single and Multiple Select**: Configure fields for single or multiple selection
@@ -13,10 +40,10 @@ A production-ready React component for hierarchical (dependent) dropdowns, desig
 - **Accessibility**: WAI-ARIA compliant with keyboard navigation support
 - **Performance Optimized**: Memoization, lazy loading, and response caching
 
-## Installation
+## 🚀 Installation
 
 ```bash
-npm install @hierarchical/select
+npm install @iazadur/hierarchical-select
 
 # Peer dependencies
 npm install react react-dom
@@ -34,19 +61,20 @@ npm install antd
 npm install @radix-ui/react-select
 ```
 
-## Basic Usage
+## 💻 Basic Usage
 
 ```jsx
 import React from "react";
-import HierarchicalSelect from "@hierarchical/select";
+import HierarchicalSelect from "@iazadur/hierarchical-select";
 
 const App = () => {
   const fields = [
     {
       index: 0,
       options: [
-        { value: "bd", label: "Bangladesh" },
-        { value: "in", label: "India" },
+        { value: "us", label: "United States" },
+        { value: "ca", label: "Canada" },
+        { value: "uk", label: "United Kingdom" },
       ],
       placeholder: "Select Country",
       label: "Country",
@@ -58,9 +86,25 @@ const App = () => {
       label: "Region",
       fetchOptions: async (parentValue) => {
         // Fetch regions based on selected country
-        const response = await fetch(`/api/regions?country=${parentValue}`);
-        const data = await response.json();
-        return data.map((item) => ({ value: item.id, label: item.name }));
+        // Simulated API call with static data
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        const regions = {
+          us: [
+            { value: "ca", label: "California" },
+            { value: "ny", label: "New York" },
+          ],
+          ca: [
+            { value: "on", label: "Ontario" },
+            { value: "qc", label: "Quebec" },
+          ],
+          uk: [
+            { value: "eng", label: "England" },
+            { value: "sct", label: "Scotland" },
+          ],
+        };
+
+        return regions[parentValue] || [];
       },
     },
     {
@@ -71,9 +115,21 @@ const App = () => {
       multiple: true, // Allow multiple selections
       fetchOptions: async (parentValue) => {
         // Fetch cities based on selected region
-        const response = await fetch(`/api/cities?region=${parentValue}`);
-        const data = await response.json();
-        return data.map((item) => ({ value: item.id, label: item.name }));
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        const cities = {
+          ca: [
+            { value: "sf", label: "San Francisco" },
+            { value: "la", label: "Los Angeles" },
+          ],
+          ny: [
+            { value: "nyc", label: "New York City" },
+            { value: "buf", label: "Buffalo" },
+          ],
+          // ... more cities
+        };
+
+        return cities[parentValue] || [];
       },
     },
   ];
@@ -81,7 +137,7 @@ const App = () => {
   return (
     <HierarchicalSelect
       fields={fields}
-      designSystem="antd" // or "shadcn"
+      designSystem="shadcn" // or "antd"
       onChange={(values) => console.log("Selected:", values)}
       onError={(error) => console.error("Error:", error)}
     />
@@ -91,79 +147,34 @@ const App = () => {
 export default App;
 ```
 
-## Examples
+## 🎨 Custom Styling
 
-### With Ant Design
-
-```jsx
-import HierarchicalSelect from "@hierarchical/select";
-
-// Create fields configuration...
-
-const AntDesignExample = () => (
-  <HierarchicalSelect
-    fields={fields}
-    designSystem="antd"
-    onChange={(values) => console.log("Selected:", values)}
-  />
-);
-```
-
-### With Shadcn UI
+The component supports custom styling to match your application design. You can add custom styles to each field:
 
 ```jsx
-import HierarchicalSelect from "@hierarchical/select";
-
-// Create fields configuration...
-
-const ShadcnExample = () => (
-  <HierarchicalSelect
-    fields={fields}
-    designSystem="shadcn"
-    onChange={(values) => console.log("Selected:", values)}
-  />
-);
-```
-
-### With Static Options
-
-```jsx
-import HierarchicalSelect from "@hierarchical/select";
-
-const StaticExample = () => {
-  const fields = [
+<HierarchicalSelect
+  fields={[
     {
       index: 0,
-      options: [
-        { value: "electronics", label: "Electronics" },
-        { value: "clothing", label: "Clothing" },
-      ],
-    },
-    {
-      index: 1,
-      options: [],
-      fetchOptions: (category) => {
-        // Static mapping instead of API call
-        const subcategories = {
-          electronics: [
-            { value: "phones", label: "Phones" },
-            { value: "computers", label: "Computers" },
-          ],
-          clothing: [
-            { value: "men", label: "Men" },
-            { value: "women", label: "Women" },
-          ],
-        };
-        return subcategories[category] || [];
+      options: [...],
+      // Custom styling
+      className: 'my-custom-field',
+      customStyle: {
+        background: '#f8fafc',
+        padding: '12px',
+        borderRadius: '8px'
       },
+      // Style just the select element
+      selectClassName: 'my-custom-select',
+      selectStyle: { borderWidth: '2px' }
     },
-  ];
-
-  return <HierarchicalSelect fields={fields} />;
-};
+    // ...more fields
+  ]}
+  designSystem="shadcn"
+/>
 ```
 
-## API Reference
+## 📝 API Reference
 
 ### HierarchicalSelect Props
 
@@ -178,77 +189,52 @@ const StaticExample = () => {
 
 ### FieldConfig Interface
 
-| Property     | Type                                                        | Default              | Description                             |
-| ------------ | ----------------------------------------------------------- | -------------------- | --------------------------------------- |
-| index        | number                                                      | required             | The position of the field (0-based)     |
-| options      | { value: string \| number; label: string }[]                | required             | Static options for the field            |
-| multiple     | boolean                                                     | false                | Whether multiple selections are allowed |
-| placeholder  | string                                                      | 'Select an option'   | Placeholder text                        |
-| label        | string                                                      | `Level ${index + 1}` | Label for the field                     |
-| fetchOptions | (parentValue: any) => Promise<OptionType[]> \| OptionType[] | -                    | Function to fetch dependent options     |
-| disabled     | boolean                                                     | false                | Disables the specific field             |
-| errorMessage | string                                                      | -                    | Custom error message                    |
+| Property        | Type                                                        | Default              | Description                              |
+| --------------- | ----------------------------------------------------------- | -------------------- | ---------------------------------------- |
+| index           | number                                                      | required             | The position of the field (0-based)      |
+| options         | { value: string \| number; label: string }[]                | required             | Static options for the field             |
+| multiple        | boolean                                                     | false                | Whether multiple selections are allowed  |
+| placeholder     | string                                                      | 'Select an option'   | Placeholder text                         |
+| label           | string                                                      | `Level ${index + 1}` | Label for the field                      |
+| fetchOptions    | (parentValue: any) => Promise<OptionType[]> \| OptionType[] | -                    | Function to fetch dependent options      |
+| disabled        | boolean                                                     | false                | Disables the specific field              |
+| errorMessage    | string                                                      | -                    | Custom error message                     |
+| className       | string                                                      | -                    | Custom CSS class for the field container |
+| customStyle     | React.CSSProperties                                         | -                    | Custom styles for the field container    |
+| selectClassName | string                                                      | -                    | Custom CSS class for the select element  |
+| selectStyle     | React.CSSProperties                                         | -                    | Custom styles for the select element     |
 
-## Utilities
+## 👍 Design System Support
 
-The package provides some utility functions:
+### Ant Design
 
-```jsx
-import HierarchicalSelect, { clearCache } from "@hierarchical/select";
+The component integrates seamlessly with Ant Design, using the official `Select` component with proper styling and error states.
 
-// Clear the cache for all fields
-clearCache();
+### Shadcn UI
 
-// Clear the cache for a specific key
-clearCache("field_1_parent_country1");
-```
+For Shadcn UI, we've built a custom implementation based on Radix UI's primitives that follows Shadcn's design principles, with:
 
-## Performance Optimization
+- Clean, minimal styling
+- Proper focus and hover states
+- Accessible keyboard navigation
+- Elegant tags for multiple selection
+- Error and loading states
 
-This component includes several performance optimizations:
-
-- **Response Caching**: API responses are cached to avoid redundant calls
-- **Debouncing**: Prevents rapid successive calls when selections change quickly
-- **Memoization**: Uses React's useMemo and useCallback to prevent unnecessary re-renders
-
-## Accessibility
-
-The component follows WAI-ARIA standards:
-
-- Proper ARIA attributes for selects
-- Keyboard navigation support
-- Focus management between dependent fields
-
-## Browser Support
+## 🧩 Browser Support
 
 - Chrome (latest 2 versions)
 - Firefox (latest 2 versions)
 - Safari (latest 2 versions)
 - Edge (latest 2 versions)
 
-## Troubleshooting
+## 🛠️ Troubleshooting
 
-### Common Issues
+If you encounter any issues with the component, please check our [GitHub issues](https://github.com/iazadur/Hierarchical-Select/issues) or submit a new one.
 
-#### Fields aren't enabling correctly
+## 📚 Documentation
 
-- Ensure your fields have the correct `index` values
-- Check that parent fields have valid selections
+For more examples and detailed documentation, visit our [Storybook site](https://iazadur.github.io/Hierarchical-Select/).
 
-#### API errors
+## 📄 License
 
-- Verify your `fetchOptions` function handles errors properly
-- Ensure the response format matches the expected OptionType[]
-
-#### Styling issues
-
-- For Ant Design, ensure you've imported Ant Design CSS
-- For Shadcn, check your Tailwind configuration
-
-## Documentation
-
-Check out our interactive component documentation at [https://iazadur.github.io/hierarchical-select/](https://iazadur.github.io/hierarchical-select/)
-
-## License
-
-MIT
+MIT © [iazadur](https://github.com/iazadur)

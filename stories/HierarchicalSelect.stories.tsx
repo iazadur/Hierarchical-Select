@@ -137,7 +137,71 @@ ShadcnUIExample.args = {
 ShadcnUIExample.parameters = {
     docs: {
         description: {
-            story: 'The same hierarchical select implemented with Shadcn UI (Radix UI) components.',
+            story: 'The same hierarchical select implemented with Shadcn UI (Radix UI) components. The improved design provides a clean and accessible user interface.',
+        },
+    },
+};
+
+// Shadcn UI with custom styling
+export const ShadcnWithCustomStyling = Template.bind({});
+ShadcnWithCustomStyling.args = {
+    fields: [
+        {
+            ...locationFields[0],
+            className: 'custom-field',
+            customStyle: {
+                background: '#f8fafc',
+                padding: '12px',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+            },
+            selectClassName: 'custom-select',
+            selectStyle: {
+                borderWidth: '2px',
+                borderColor: '#cbd5e1'
+            }
+        },
+        {
+            ...locationFields[1],
+            className: 'custom-field',
+            customStyle: {
+                background: '#f8fafc',
+                padding: '12px',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                marginTop: '16px'
+            },
+            selectClassName: 'custom-select',
+            selectStyle: {
+                borderWidth: '2px',
+                borderColor: '#cbd5e1'
+            }
+        },
+        {
+            ...locationFields[2],
+            className: 'custom-field',
+            customStyle: {
+                background: '#f8fafc',
+                padding: '12px',
+                borderRadius: '8px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                marginTop: '16px'
+            },
+            selectClassName: 'custom-select',
+            selectStyle: {
+                borderWidth: '2px',
+                borderColor: '#cbd5e1'
+            }
+        },
+    ],
+    designSystem: 'shadcn',
+    onChange: (values) => console.log('Selected values:', values),
+    onError: (error) => console.error('Error:', error),
+};
+ShadcnWithCustomStyling.parameters = {
+    docs: {
+        description: {
+            story: 'Example of Shadcn UI with custom styling applied to each field. This demonstrates how you can customize the appearance of the component to match your application design.',
         },
     },
 };
@@ -146,7 +210,7 @@ ShadcnUIExample.parameters = {
 export const DisabledState = Template.bind({});
 DisabledState.args = {
     fields: locationFields,
-    designSystem: 'antd',
+    designSystem: 'shadcn', // Changed to shadcn to showcase the improved disabled state
     disabled: true,
     onChange: (values) => console.log('Selected values:', values),
     onError: (error) => console.error('Error:', error),
@@ -154,7 +218,7 @@ DisabledState.args = {
 DisabledState.parameters = {
     docs: {
         description: {
-            story: 'Example showing the component in a fully disabled state.',
+            story: 'Example showing the component in a fully disabled state using Shadcn UI components.',
         },
     },
 };
@@ -169,14 +233,14 @@ WithErrorState.args = {
         },
         ...locationFields.slice(1),
     ],
-    designSystem: 'antd',
+    designSystem: 'shadcn', // Changed to shadcn to showcase the improved error state
     onChange: (values) => console.log('Selected values:', values),
     onError: (error) => console.error('Error:', error),
 };
 WithErrorState.parameters = {
     docs: {
         description: {
-            story: 'Example showing how errors are displayed in the component.',
+            story: 'Example showing how errors are displayed in the component with Shadcn UI styling.',
         },
     },
 };

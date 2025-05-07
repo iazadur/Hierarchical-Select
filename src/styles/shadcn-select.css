@@ -1,0 +1,306 @@
+/* General styling */
+.shadcn-select-field {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Single select styling */
+.shadcn-select-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  width: 100%;
+  min-height: 38px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.shadcn-select-trigger:hover {
+  border-color: #d1d5db;
+}
+
+.shadcn-select-trigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+}
+
+.shadcn-select-trigger.has-error {
+  border-color: #ef4444;
+}
+
+.shadcn-select-trigger[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shadcn-select-content {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  z-index: 50;
+  min-width: 8rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.shadcn-select-viewport {
+  padding: 5px;
+}
+
+.shadcn-select-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+  position: relative;
+}
+
+.shadcn-select-item:hover {
+  background-color: #f3f4f6;
+}
+
+.shadcn-select-item[data-highlighted] {
+  background-color: #f3f4f6;
+  outline: none;
+}
+
+.shadcn-select-item[data-state='checked'] {
+  background-color: #f0f7ff;
+  color: #1d4ed8;
+}
+
+.shadcn-select-item-indicator {
+  color: #1d4ed8;
+}
+
+.shadcn-select-no-options {
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.shadcn-select-scroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  background-color: white;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.shadcn-select-scroll-button:hover {
+  background-color: #f3f4f6;
+}
+
+.shadcn-select-icon {
+  color: #6b7280;
+  margin-left: 6px;
+}
+
+/* Multiple select styling */
+.shadcn-multiselect {
+  width: 100%;
+  position: relative;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.shadcn-multiselect.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.shadcn-multiselect.has-error .shadcn-multiselect-control {
+  border-color: #ef4444;
+}
+
+.shadcn-multiselect-control {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background-color: white;
+  min-height: 38px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shadcn-multiselect-control:hover {
+  border-color: #d1d5db;
+}
+
+.shadcn-multiselect-control.is-open {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.shadcn-multiselect-placeholder {
+  color: #6b7280;
+  padding: 6px 4px;
+}
+
+.shadcn-multiselect-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  flex: 1;
+  padding: 4px 0;
+}
+
+.shadcn-multiselect-tag {
+  background-color: #f0f7ff;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-width: 100%;
+}
+
+.shadcn-multiselect-tag span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shadcn-multiselect-tag-remove {
+  background: none;
+  border: none;
+  color: #1d4ed8;
+  margin-left: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+}
+
+.shadcn-multiselect-tag-remove:hover {
+  color: #1e40af;
+}
+
+.shadcn-multiselect-indicators {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  padding: 0 4px;
+  color: #6b7280;
+}
+
+.shadcn-multiselect-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  max-height: 200px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease;
+}
+
+.shadcn-multiselect-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.shadcn-multiselect-option:hover {
+  background-color: #f3f4f6;
+}
+
+.shadcn-multiselect-option.is-selected {
+  background-color: #f0f7ff;
+  color: #1d4ed8;
+}
+
+.shadcn-multiselect-option-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  margin-right: 8px;
+  color: #1d4ed8;
+}
+
+.shadcn-multiselect-no-options {
+  padding: 10px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Loading state */
+.shadcn-loading-state {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  color: #6b7280;
+  background-color: #f9fafb;
+}
+
+.shadcn-loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e5e7eb;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

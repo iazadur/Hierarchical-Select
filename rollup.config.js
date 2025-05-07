@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
 import dts from 'rollup-plugin-dts';
 import { readFileSync } from 'fs';
 
@@ -32,6 +33,7 @@ export default [
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
+      postcss()
     ],
     external: ['react', 'react-dom', 'antd', '@radix-ui/react-select']
   },
