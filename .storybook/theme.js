@@ -6,7 +6,7 @@ export default create({
     // Brand
     brandTitle: 'Hierarchical Select',
     brandUrl: 'https://github.com/iazadur/hierarchical-select',
-    brandImage: 'https://raw.githubusercontent.com/iazadur/hierarchical-select/main/logo.png',
+    brandImage: 'https://raw.githubusercontent.com/iazadur/hierarchical-select/main/logo.svg',
     brandTarget: '_self',
 
     // UI
